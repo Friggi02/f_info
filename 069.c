@@ -11,6 +11,7 @@ stessa). Per ogni diversa lunghezza l, stampare le stringhe palindrome trovate e
 	int i, j, k, conto, ispal, len;
 
 /*ACQUISIZIONE*/
+	printf("inserire la stringa: ");
 	scanf("%s", str);
 
 /*CALCOLO LUNGHEZZA*/
@@ -18,6 +19,7 @@ stessa). Per ogni diversa lunghezza l, stampare le stringhe palindrome trovate e
 
 /*ELABORAZIONE*/
 	for(i=2; i<=len; i++){
+		printf("\nsottostringhe di lunghezza %d:\n", i);
 		for(j=0, conto=0; j<=len-i; j++){
 			for(k=0, ispal=1; k<i/2 && ispal; k++){
 				if(str[j+k]!=str[j+i-1-k]){
@@ -32,7 +34,7 @@ stessa). Per ogni diversa lunghezza l, stampare le stringhe palindrome trovate e
 				printf("\n");
 			}
 		}
-			printf("%d\n", conto);
+		printf("conteggio: %d\n", conto);
 	}		
 		
 	return 0;

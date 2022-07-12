@@ -20,29 +20,54 @@ La sottomatrice a somma nulla di dimensione massima che parte da m[0][0] è:
 -1 -2		*/
 
 #include <stdio.h>
+#include <stdlib.h>
 
-void alloca_matrice(int);
-void dealloca_matrice(int*, int);
+void* alloca_matrice(int**, int);
+void* dealloca_matrice(int**, int);
 
 int main(){
+
+	int dim;
+
+	printf("inserire dimensione matrice quadrata: ");
+	scanf("%d", &dim);
 	
 	return 0;
 }
 
-void* alloca_matrice(int dim){
+void* alloca_matrice(int **mat,int dim){
 
-	int *mat;
+	int i;
 
-	mat = malloc(dim*dim*sizeof(int));
+	mat = (int**)malloc(dim*sizeof(int*));
 
 	if(mat){
-		return mat;
+		mat[0] = (int*)malloc(dim*dim*sizeof(int));
+		if(mat[0]){
+			for(i=1; i<dim; i++){
+				mat[i] = mat[0]+(i*dim);
+			}
+		}else{
+			free(mat[0]);
+			return NULL;
+		}
 	}else{
-		//dovrei deallocare quello che ho usato
+		free(mat);
 		return NULL;
 	}
+
+	return mat;
 }
 
-void dealloca_matrice(int*, int){
+void* dealloca_matrice(int **mat, int dim){
 
+	int i;
+
+	for(i=dim; i=0; i--){
+		free(mat[i]);
+	}
+
+	free(mat);
+
+	return mat;
 }
