@@ -22,20 +22,67 @@ La sottomatrice a somma nulla di dimensione massima che parte da m[0][0] è:
 #include <stdio.h>
 #include <stdlib.h>
 
-void* alloca_matrice(int**, int);
-void* dealloca_matrice(int**, int);
+int** alloca_matrice(int**, int);
+int** dealloca_matrice(int**, int);
 
 int main(){
 
-	int dim;
+	int dim, i, j, n, k, l, conto;
+	int** mat;
 
+/*ACQUISIZIONE DIMENSIONE MATRICE*/
 	printf("inserire dimensione matrice quadrata: ");
 	scanf("%d", &dim);
-	
+
+/*ALLOCAZIONE DELLA MATRICE*/
+	mat = alloca_matrice(mat, dim);
+
+/*ACQUISIZIONE VALORI DELLA MATRICE*/
+	printf("inserire i valori della matrice:\n");
+	for(i=0; i<dim; i++){
+		for(j=0; j<dim; j++){
+			scanf("%d", &mat[i][j]);
+		}
+	}
+
+/*CONTROLLO DELLA MATRICE ACQUISITA*/
+	printf("\nmatrice acquisita:\n");
+	for(i=0; i<dim; i++){
+		for(j=0; j<dim; j++){
+			printf("%2d ", mat[i][j]);
+		}
+		printf("\n");
+	}
+
+/*ELABORAZIONE*/
+	for(n=2; n<=dim; n++){
+		printf("\nN=%d\n", n);
+		for(i=0; i<dim-n; i++){
+			for(j=0; j<dim-n; j++){
+				for(k=0, conto=0; k<n; k++){
+					for(l=0; l<n; l++){
+						conto += mat[i+k][j+l];
+					}
+				}
+				if(conto==0){
+					for(k=0; k<n; k++){
+						for(l=0; l<n; l++){
+							printf("%2d ", mat[i+k][j+l]);
+						}
+						printf("\n");
+					}
+				}
+			}
+		}
+	}
+
+/*DEALLOCAZIONE DELLA MATRICE*/
+	mat = dealloca_matrice(mat, dim);
+
 	return 0;
 }
 
-void* alloca_matrice(int **mat,int dim){
+int** alloca_matrice(int **mat,int dim){
 
 	int i;
 
@@ -59,7 +106,7 @@ void* alloca_matrice(int **mat,int dim){
 	return mat;
 }
 
-void* dealloca_matrice(int **mat, int dim){
+int** dealloca_matrice(int **mat, int dim){
 
 	int i;
 

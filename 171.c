@@ -88,9 +88,7 @@ nodo_t* inserisciInOrdine_ric(nodo_t *h, int n){
 	if(!h || n<=h->num){
 		return inserisciInTesta(h, n);
 	}else{
-
-
-	h = inserisciInOrdine_ric(h->next, n);
+		h = inserisciInOrdine_ric(h->next, n);
 	}
 
 	return h;
